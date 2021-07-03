@@ -1,5 +1,6 @@
 import './App.css';
 import {createStore} from "redux";
+import reducers from './reducers';
 
 // Store - Global state
 
@@ -16,30 +17,16 @@ const petDecrement = () => {
    }
 }
 
-// Reducer - Describe how an action change the state into another. Will check which
-const petCounter = (state=0, action) => {
-  switch(action.type){
-    case "PET_INCREASED":
-      return state + 1;
-      break;
-    case "PET_DECREASED":
-      return state - 1;
-      break;
-      default:
-        return state;
-  }
-}
 
-const store = createStore(petCounter);
+
+const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 // action is called and store will be modified
 
 store.subscribe(() => console.log(store.getState()));
 
 // Dispatch - Perform the action to reducer
-store.dispatch(petIncrement());
-store.dispatch(petIncrement());
-store.dispatch(petDecrement());
+
 
 function App() {
   return (
